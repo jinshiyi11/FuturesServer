@@ -1,0 +1,24 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-nickName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/futures
+    username: root
+    password: huyidao313
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+security:
+  basic:
+    enable: false
+  oauth2:
+    resource:
+      filter-order: 3
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
