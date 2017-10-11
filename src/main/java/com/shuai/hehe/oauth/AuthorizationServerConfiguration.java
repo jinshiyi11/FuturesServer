@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -18,15 +21,21 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
+//    @Autowired
+//    AuthenticationManagerBuilder authenticationManager;
 
     public AuthorizationServerConfiguration() {
         super();
     }
 
+
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()");
+                .checkTokenAccess("isAuthenticated()")
+//                .authenticationEntryPoint(new MyAuthenticationEntryPoint())
+                ;
         //允许表单认证
         // security.allowFormAuthenticationForClients();
     }
@@ -55,5 +64,14 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 
         endpoints.authenticationManager(authenticationManager);
+
+        // Workaround for https://github.com/spring-projects/spring-boot/issues/1801
+//        endpoints.authenticationManager(new AuthenticationManager() {
+//            @Override
+//            public Authentication authenticate(Authentication authentication)
+//                    throws AuthenticationException {
+//                return authenticationManager.getOrBuild().authenticate(authentication);
+//            }
+//        });
     }
 }

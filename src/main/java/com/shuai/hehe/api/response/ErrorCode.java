@@ -6,8 +6,16 @@ package com.shuai.hehe.api.response;
 public enum ErrorCode {
     ERROR_UNKNOWN(-1,"unknown error"),
     ERROR_SUCCESS(0,"success"),
+    // 拒绝访问
+    ERROR_ACCESS_DENY(1,"error access deny"),
+    // 参数不正确
+    ERROR_INVALID_PARAM(2,"invalid param"),
+    // 用户已存在
+    ERROR_USER_ALREADY_EXIST(3,"user already exist"),
     // 发送验证码失败
-    ERROR_SEND_VERIFICATION_CODE(1,"send verification code fail")
+    ERROR_SEND_VERIFICATION_CODE(4,"send verification code fail"),
+    // 验证码不正确
+    ERROR_INVALID_VERIFICATION_CODE(5,"invalid verification code")
     ;
 
     private int mErrorCode;

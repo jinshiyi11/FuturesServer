@@ -1,4 +1,4 @@
-package com.shuai.hehe;
+package com.shuai.hehe.api.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
