@@ -1,29 +1,30 @@
 package com.shuai.hehe.api.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-/**
- * Created by as on 2017/9/22.
- */
 @Entity
 public class User {
     @Id
     @GeneratedValue
-    private int id;
-    private String nickName;
+    private long id;
     private String phone;
     private String password;
+
+    private String nickName;
+    private String headImageUrl;
 
     public User() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -49,6 +50,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getHeadImageUrl() {
+        return headImageUrl;
+    }
+
+    public void setHeadImageUrl(String headImageUrl) {
+        this.headImageUrl = headImageUrl;
     }
 
     @Override

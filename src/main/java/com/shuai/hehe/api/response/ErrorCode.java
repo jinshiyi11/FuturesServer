@@ -11,7 +11,7 @@ public enum ErrorCode {
     // 参数不正确
     ERROR_INVALID_PARAM(2,"invalid param"),
     // 用户已存在
-    ERROR_USER_ALREADY_EXIST(3,"user already exist"),
+    ERROR_USER_ALREADY_EXIST(3,"用户已存在"),
     // 发送验证码失败
     ERROR_SEND_VERIFICATION_CODE(4,"send verification code fail"),
     // 验证码不正确

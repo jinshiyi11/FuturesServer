@@ -2,6 +2,7 @@ package com.shuai.hehe.api;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.shuai.hehe.api.exception.ServiceException;
 import com.shuai.hehe.api.response.ErrorCode;
 import com.shuai.hehe.api.response.ResponseInfo;
 import okhttp3.*;

@@ -48,7 +48,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .secret("secret")
                 .authorizedGrantTypes("authorization_code","password")
                 .scopes("user_info")
-                .autoApprove(true);
+                .autoApprove(true)
+                .accessTokenValiditySeconds(24*60*60);
 
         //配置两个客户端,一个用于password认证一个用于client认证
 //        clients.inMemory().withClient("client_1")

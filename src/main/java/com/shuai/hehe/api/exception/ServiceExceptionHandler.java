@@ -1,4 +1,4 @@
-package com.shuai.hehe.api;
+package com.shuai.hehe.api.exception;
 
 import com.shuai.hehe.api.response.ErrorCode;
 import com.shuai.hehe.api.response.ResponseInfo;

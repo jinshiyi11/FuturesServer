@@ -1,54 +1,53 @@
 package com.shuai.hehe.api.response;
 
-import com.google.gson.annotations.SerializedName;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
  */
 public class ResponseInfo<T> {
-    @SerializedName("errorCode")
-    private int mErrorCode = ErrorCode.ERROR_SUCCESS.getErrorCode();
+    private int code = ErrorCode.ERROR_SUCCESS.getErrorCode();
 
-    @SerializedName("msg")
-    private String mMessage;
+    //@JsonProperty("msg")
+    private String msg;
 
-    @SerializedName("data")
-    private T mData;
+    private T data;
 
     public ResponseInfo() {
     }
 
     public ResponseInfo(int errorCode, String message) {
-        mErrorCode = errorCode;
-        mMessage = message;
+        code = errorCode;
+        msg = message;
     }
 
     public ResponseInfo(ErrorCode error) {
-        mErrorCode = error.getErrorCode();
-        mMessage = error.getMessage();
+        code = error.getErrorCode();
+        msg = error.getMessage();
     }
 
-    public int getErrorCode() {
-        return mErrorCode;
+    public int getCode() {
+        return code;
     }
 
-    public void setErrorCode(int errorCode) {
-        this.mErrorCode = errorCode;
+    public void setCode(int errorCode) {
+        this.code = errorCode;
     }
 
-    public String getMessage() {
-        return mMessage;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.mMessage = message;
+    public void setMsg(String message) {
+        this.msg = message;
     }
 
     public T getData() {
-        return mData;
+        return data;
     }
 
     public void setData(T data) {
-        this.mData = data;
+        this.data = data;
     }
 }

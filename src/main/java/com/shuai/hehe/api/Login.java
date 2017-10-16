@@ -9,6 +9,7 @@ import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
@@ -39,7 +40,7 @@ public class Login {
     public static class TokenInfo {
         public String token;
         public int expiresIn;
-        public String userId;
+        public String uid;
     }
 
     private static class OAuth2AccessToken {
@@ -49,19 +50,22 @@ public class Login {
         public String scope;
     }
 
+    public void setUserRepository(UserRepository mUserRepository) {
+        this.mUserRepository = mUserRepository;
+    }
+
     @PostMapping("/api/login")
     @ResponseBody
     public ResponseInfo<TokenInfo> login(
-                              @RequestParam("username") String phone,
-                              @RequestParam("password") String password,
-                              HttpServletRequest request,
-                              HttpServletResponse response) throws IOException {
+            @RequestParam("username") String phone,
+            @RequestParam("password") String password,
+            HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
 
 //        UsernamePasswordAuthenticationToken authToken=new UsernamePasswordAuthenticationToken(phone, password);
 //        Authentication authentication=authenticationManager.authenticate(authToken);
 ////        sas.onAuthentication(authentication, request, response);
 //        SecurityContextHolder.getContext().setAuthentication(authentication);
-
 
         RequestBody formBody = new FormBody.Builder()
                 .add("username", phone)
@@ -82,12 +86,12 @@ public class Login {
             Gson gson = new Gson();
             OAuth2AccessToken token = gson.fromJson(body, OAuth2AccessToken.class);
 
-            ResponseInfo<TokenInfo> result=new ResponseInfo<>();
+            ResponseInfo<TokenInfo> result = new ResponseInfo<>();
             TokenInfo tokenInfo = new TokenInfo();
             tokenInfo.token = token.access_token;
             tokenInfo.expiresIn = token.expires_in;
             User user = mUserRepository.findByPhone(phone);
-            tokenInfo.userId = String.valueOf(user.getId());
+            tokenInfo.uid = String.valueOf(user.getId());
             result.setData(tokenInfo);
             return result;
         }

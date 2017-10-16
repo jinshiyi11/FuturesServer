@@ -1,4 +1,4 @@
-package com.shuai.hehe.api.entity;
+package com.shuai.hehe.api.logic;
 
 import java.util.HashMap;
 import java.util.Map;
