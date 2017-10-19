@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
+ * 期货信息
  */
 @Entity
 @Table(
@@ -18,12 +18,14 @@ public class Futures {
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    //TODO:message,unique
+    @Column(nullable = false,length = 32)
     @NotNull
-    @Size(min = 5)
+    @Size(min = 5,message = "长度至少5个字符")
     private String name;
 
     @Column(nullable = false)
+    @NotNull
     private String title;
 
     public long getId() {

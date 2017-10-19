@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- *
+ * 评论
  */
 @Entity
 public class Comment {

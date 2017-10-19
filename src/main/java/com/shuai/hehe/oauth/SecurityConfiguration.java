@@ -73,14 +73,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .anyRequest().permitAll();
 
         http.authorizeRequests()
-                .antMatchers("/api/sendVerificationCode", "/api/login", "/api/registerByPhone", "/oauth/authorize").permitAll()
+                .antMatchers("/api/sendVerificationCode",
+                        "/api/login",
+                        "/api/registerByPhone",
+                        "/oauth/authorize",
+                        "/**"
+                ).permitAll()
                 .anyRequest().authenticated()
         //.and().formLogin()
         ;
 
         http.csrf().disable();
-
-
     }
 
 

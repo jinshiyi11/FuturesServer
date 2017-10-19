@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.ConstraintViolationException;
+
 /**
  * 统一处理异常
  */
@@ -21,6 +23,10 @@ public class ServiceExceptionHandler {
         if(exception instanceof ServiceException){
             ServiceException serviceException= (ServiceException) exception;
             return new ResponseInfo(serviceException.getErrorCode(), serviceException.getMessage());
+        }else if(exception instanceof ConstraintViolationException){
+            //TODO:message
+            ConstraintViolationException constraintViolationException= (ConstraintViolationException) exception;
+            return new ResponseInfo(ErrorCode.ERROR_INVALID_PARAM.getErrorCode(), constraintViolationException.getMessage());
         }else{
             sLogger.error("未知异常",exception);
             return new ResponseInfo(ErrorCode.ERROR_UNKNOWN);

@@ -9,7 +9,7 @@ public enum ErrorCode {
     // 拒绝访问
     ERROR_ACCESS_DENY(1,"error access deny"),
     // 参数不正确
-    ERROR_INVALID_PARAM(2,"invalid param"),
+    ERROR_INVALID_PARAM(2,"参数不正确"),
     // 用户已存在
     ERROR_USER_ALREADY_EXIST(3,"用户已存在"),
     // 发送验证码失败

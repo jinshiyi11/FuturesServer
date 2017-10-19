@@ -5,7 +5,7 @@ spring:
     active: dev
   datasource:
     driver-class-nickName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/futures
+    url: jdbc:mysql://localhost:3306/futures?useUnicode=true&characterEncoding=utf-8
     username: root
     password: huyidao313
   jpa:
