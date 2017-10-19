@@ -5,8 +5,6 @@ import com.shuai.hehe.api.repository.CommentRepository;
 import com.shuai.hehe.api.response.ErrorCode;
 import com.shuai.hehe.api.response.ResponseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -32,10 +30,12 @@ public class CommentController {
         if (startCommentId <= 0) {
             startCommentId = Long.MAX_VALUE;
         }
-        List<Comment> commentList = mRepository.getCommentList(futuresId, startCommentId);
-        ResponseInfo<List<Comment>> result = new ResponseInfo<>();
-        result.setData(commentList);
-        return result;
+//        List<Comment> commentList = mRepository.getCommentList(futuresId, startCommentId);
+//        ResponseInfo<List<Comment>> result = new ResponseInfo<>();
+//        result.setData(commentList);
+//        return result;
+
+        return null;
     }
 
     @PostMapping("api/addComment")
@@ -51,7 +51,7 @@ public class CommentController {
         comment.setPpid(ppid);
         comment.setUserId(userId);
         comment.setContent(content);
-        comment.setCommentDate(new Date().getTime());
+        comment.setDate(new Date().getTime());
         mRepository.save(comment);
         return new ResponseInfo(ErrorCode.ERROR_SUCCESS);
     }

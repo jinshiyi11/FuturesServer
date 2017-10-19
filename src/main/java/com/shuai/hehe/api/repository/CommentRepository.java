@@ -12,6 +12,6 @@ import java.util.List;
  *
  */
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
-    @Query("select o from Comment where futuresId=:futuresId and id<:startCommentId order by commentDate desc")
-    List<Comment> getCommentList(long futuresId, long startCommentId);
+//    @Query("select o from Comment where futuresId=:futuresId and id<:startCommentId order by commentDate desc")
+//    List<Object[]> getCommentList(long futuresId, long startCommentId);
 }

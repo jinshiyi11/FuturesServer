@@ -28,7 +28,7 @@ public class Comment {
     private int likeCount;
 
     //评论时间
-    private long commentDate;
+    private long date;
 
     public long getId() {
         return id;
@@ -86,11 +86,11 @@ public class Comment {
         this.likeCount = likeCount;
     }
 
-    public long getCommentDate() {
-        return commentDate;
+    public long getDate() {
+        return date;
     }
 
-    public void setCommentDate(long commentDate) {
-        this.commentDate = commentDate;
+    public void setDate(long date) {
+        this.date = date;
     }
 }
