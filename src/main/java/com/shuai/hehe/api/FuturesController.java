@@ -1,14 +1,13 @@
 package com.shuai.hehe.api;
 
 import com.shuai.hehe.api.entity.Futures;
-import com.shuai.hehe.api.repository.FuturesRepository;
+import com.shuai.hehe.api.mapper.FuturesMapper;
 import com.shuai.hehe.api.response.ErrorCode;
 import com.shuai.hehe.api.response.ResponseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -20,12 +19,12 @@ import java.util.List;
 @Validated
 public class FuturesController {
     @Autowired
-    private FuturesRepository mRepository;
+    private FuturesMapper mMapper;
 
     @GetMapping("/api/futuresList")
     @ResponseBody
     public ResponseInfo<List<Futures>> getFuturesList() {
-        List<Futures> data = mRepository.findAll();
+        List<Futures> data = mMapper.getFuturesList();
         ResponseInfo<List<Futures>> result = new ResponseInfo<>();
         result.setData(data);
         return result;
@@ -40,7 +39,7 @@ public class FuturesController {
     @PostMapping("/api/searchFutures")
     @ResponseBody
     public ResponseInfo<List<Futures>> searchFutures(@NotNull @Size(min = 1,message = "关键字不能为空") String key) {
-        List<Futures> data = mRepository.searchFutures(key);
+        List<Futures> data = mMapper.searchFutures(key);
         ResponseInfo<List<Futures>> result = new ResponseInfo<>();
         result.setData(data);
         return result;
@@ -48,8 +47,8 @@ public class FuturesController {
 
     @GetMapping("/api/getFutures")
     @ResponseBody
-    public ResponseInfo<Futures> getFutures(long id) {
-        Futures futures = mRepository.findOne(id);
+    public ResponseInfo<Futures> getFutures(int id) {
+        Futures futures = mMapper.getFutures(id);
         ResponseInfo<Futures> result = new ResponseInfo<>();
         result.setData(futures);
         return result;
@@ -62,21 +61,21 @@ public class FuturesController {
         Futures futures = new Futures();
         futures.setName(name);
         futures.setTitle(title);
-        mRepository.save(futures);
+        mMapper.addFutures(futures);
         return new ResponseInfo(ErrorCode.ERROR_SUCCESS);
     }
 
     @PostMapping("/api/updateFutures")
     @ResponseBody
     public ResponseInfo updateFutures(Futures futures) {
-        mRepository.save(futures);
+        mMapper.updateFutures(futures);
         return new ResponseInfo(ErrorCode.ERROR_SUCCESS);
     }
 
     @PostMapping("/api/deleteFutures")
     @ResponseBody
-    public ResponseInfo deleteFutures(long id) {
-        mRepository.delete(id);
+    public ResponseInfo deleteFutures(int id) {
+        mMapper.deleteFutures(id);
         return new ResponseInfo(ErrorCode.ERROR_SUCCESS);
     }
 }

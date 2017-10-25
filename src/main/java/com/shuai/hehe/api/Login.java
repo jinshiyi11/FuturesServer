@@ -2,23 +2,17 @@ package com.shuai.hehe.api;
 
 import com.google.gson.Gson;
 import com.shuai.hehe.api.entity.User;
-import com.shuai.hehe.api.repository.UserRepository;
+import com.shuai.hehe.api.mapper.UserMapper;
 import com.shuai.hehe.api.response.ErrorCode;
 import com.shuai.hehe.api.response.ResponseInfo;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -34,7 +28,7 @@ public class Login {
 //    private SessionAuthenticationStrategy sas;
 
     @Autowired
-    private UserRepository mUserRepository;
+    private UserMapper mUserMapper;
     private final OkHttpClient mClient = new OkHttpClient();
 
     public static class TokenInfo {
@@ -50,8 +44,8 @@ public class Login {
         public String scope;
     }
 
-    public void setUserRepository(UserRepository mUserRepository) {
-        this.mUserRepository = mUserRepository;
+    public void setUserRepository(UserMapper userMapper) {
+        mUserMapper = userMapper;
     }
 
     @PostMapping("/api/login")
@@ -90,7 +84,7 @@ public class Login {
             TokenInfo tokenInfo = new TokenInfo();
             tokenInfo.token = token.access_token;
             tokenInfo.expiresIn = token.expires_in;
-            User user = mUserRepository.findByPhone(phone);
+            User user = mUserMapper.getByPhone(phone);
             tokenInfo.uid = String.valueOf(user.getId());
             result.setData(tokenInfo);
             return result;

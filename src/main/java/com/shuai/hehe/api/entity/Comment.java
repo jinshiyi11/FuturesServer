@@ -7,10 +7,7 @@ import javax.persistence.Id;
 /**
  * 评论
  */
-@Entity
 public class Comment {
-    @Id
-    @GeneratedValue
     private long id;
     private long pid;
     private long ppid;

@@ -8,31 +8,21 @@ import javax.validation.constraints.Size;
 /**
  * 期货信息
  */
-@Entity
-@Table(
-        uniqueConstraints =
-        @UniqueConstraint(columnNames = {"name"})
-)
 public class Futures {
-    @Id
-    @GeneratedValue
-    private long id;
+    private int id;
 
-    //TODO:message,unique
-    @Column(nullable = false,length = 32)
     @NotNull
     @Size(min = 5,message = "长度至少5个字符")
     private String name;
 
-    @Column(nullable = false)
     @NotNull
     private String title;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

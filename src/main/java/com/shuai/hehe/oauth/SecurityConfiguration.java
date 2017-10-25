@@ -1,10 +1,9 @@
 package com.shuai.hehe.oauth;
 
 import com.shuai.hehe.api.entity.User;
-import com.shuai.hehe.api.repository.UserRepository;
+import com.shuai.hehe.api.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -16,10 +15,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.access.AccessDeniedHandlerImpl;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -102,7 +97,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Component("userDetailsService")
     public static class MyUserDetailsService implements UserDetailsService {
         @Autowired
-        private UserRepository mUserRepository;
+        private UserMapper mUserMapper;
 
         private List<SimpleGrantedAuthority> mAuthorities = new ArrayList<>();
 
@@ -112,7 +107,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         @Override
         public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-            User user = mUserRepository.findByPhone(phone);
+            User user = mUserMapper.getByPhone(phone);
             return new org.springframework.security.core.userdetails.User(user.getPhone(), user.getPassword(), mAuthorities);
         }
     }

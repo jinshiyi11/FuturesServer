@@ -63,8 +63,22 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+//        super.configure(http);
+
+        http.authorizeRequests()
+                .antMatchers("/api/sendVerificationCode",
+                        "/api/login",
+                        "/api/registerByPhone",
+                        "/oauth/authorize"
+                ).permitAll()
+                .anyRequest().authenticated()
+        //.and().formLogin()
+        ;
+
+        http.csrf().disable();
+
         http.exceptionHandling()
+                //TODO:下面为什么没作用?
                 .accessDeniedHandler(new OAuth2AccessDeniedHandler() {
                     @Override
                     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException authException) throws IOException, ServletException {
