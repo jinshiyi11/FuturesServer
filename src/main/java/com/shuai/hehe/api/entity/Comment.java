@@ -8,17 +8,28 @@ import javax.persistence.Id;
  * 评论
  */
 public class Comment {
+    /**
+     * 评论id
+     */
     private long id;
+
+
     private long pid;
     private long ppid;
 
-    //期货id
+    /**
+     * 期货id
+     */
     private long futuresId;
 
-    //评论者id
-    private long userId;
+    /**
+     * 评论者
+     */
+    private User user;
 
-    //评论内容
+    /**
+     * 评论内容
+     */
     private String content;
 
     //点赞数
@@ -26,6 +37,11 @@ public class Comment {
 
     //评论时间
     private long date;
+
+    /**
+     * 被回复的评论,如果不存在,则为null
+     */
+    private Comment originalComment;
 
     public long getId() {
         return id;
@@ -59,12 +75,12 @@ public class Comment {
         this.futuresId = futuresId;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getContent() {
@@ -89,5 +105,13 @@ public class Comment {
 
     public void setDate(long date) {
         this.date = date;
+    }
+
+    public Comment getOriginalComment() {
+        return originalComment;
+    }
+
+    public void setOriginalComment(Comment originalComment) {
+        this.originalComment = originalComment;
     }
 }

@@ -71,7 +71,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/sendVerificationCode",
                         "/api/login",
                         "/api/registerByPhone",
-                        "/oauth/authorize"
+                        "/oauth/authorize",
+                        "/**"
+
                 ).permitAll()
                 .anyRequest().authenticated()
         //.and().formLogin()

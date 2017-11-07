@@ -29,7 +29,7 @@ public class ServiceExceptionHandler {
             return new ResponseInfo(ErrorCode.ERROR_INVALID_PARAM.getErrorCode(), constraintViolationException.getMessage());
         }else{
             sLogger.error("未知异常",exception);
-            return new ResponseInfo(ErrorCode.ERROR_UNKNOWN);
+            return new ResponseInfo(ErrorCode.ERROR_UNKNOWN.getErrorCode(),exception.getMessage());
         }
     }
 }

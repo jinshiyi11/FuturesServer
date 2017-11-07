@@ -1,15 +1,12 @@
 package com.shuai.hehe.oauth;
 
 import com.google.gson.Gson;
-import com.shuai.hehe.api.Login;
+import com.shuai.hehe.api.LoginController;
 import com.shuai.hehe.api.response.ErrorCode;
 import com.shuai.hehe.api.response.ResponseInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -41,7 +38,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                         //super.handle(request, response, authException);
 
                         Gson gson = new Gson();
-                        ResponseInfo<Login.TokenInfo> result = new ResponseInfo<Login.TokenInfo>(ErrorCode.ERROR_ACCESS_DENY);
+                        ResponseInfo<LoginController.TokenInfo> result = new ResponseInfo<LoginController.TokenInfo>(ErrorCode.ERROR_ACCESS_DENY);
                         String json = gson.toJson(result);
                         response.setContentType("application/json; charset=UTF-8");
                         response.getWriter().print(json);
@@ -53,7 +50,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                         //super.commence(request, response, authException);
 
                         Gson gson = new Gson();
-                        ResponseInfo<Login.TokenInfo> result = new ResponseInfo<Login.TokenInfo>(ErrorCode.ERROR_ACCESS_DENY);
+                        ResponseInfo<LoginController.TokenInfo> result = new ResponseInfo<LoginController.TokenInfo>(ErrorCode.ERROR_ACCESS_DENY);
                         String json = gson.toJson(result);
                         response.setContentType("application/json; charset=UTF-8");
                         response.getWriter().print(json);
@@ -69,7 +66,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .antMatchers("/api/sendVerificationCode",
                         "/api/login",
                         "/api/registerByPhone",
-                        "/oauth/authorize"
+                        "/oauth/authorize",
+                        "/**"
                 ).permitAll()
                 .anyRequest().authenticated()
         //.and().formLogin()
@@ -85,7 +83,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                         //super.handle(request, response, authException);
 
                         Gson gson = new Gson();
-                        ResponseInfo<Login.TokenInfo> result = new ResponseInfo<Login.TokenInfo>(ErrorCode.ERROR_ACCESS_DENY);
+                        ResponseInfo<LoginController.TokenInfo> result = new ResponseInfo<LoginController.TokenInfo>(ErrorCode.ERROR_ACCESS_DENY);
                         String json = gson.toJson(result);
                         response.setContentType("application/json; charset=UTF-8");
                         response.getWriter().print(json);
@@ -97,7 +95,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                         //super.commence(request, response, authException);
 
                         Gson gson = new Gson();
-                        ResponseInfo<Login.TokenInfo> result = new ResponseInfo<Login.TokenInfo>(ErrorCode.ERROR_ACCESS_DENY);
+                        ResponseInfo<LoginController.TokenInfo> result = new ResponseInfo<LoginController.TokenInfo>(ErrorCode.ERROR_ACCESS_DENY);
                         String json = gson.toJson(result);
                         response.setContentType("application/json; charset=UTF-8");
                         response.getWriter().print(json);

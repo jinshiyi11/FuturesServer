@@ -21,7 +21,7 @@ import java.io.IOException;
  *
  */
 @RestController
-public class Login {
+public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
 //    @Autowired

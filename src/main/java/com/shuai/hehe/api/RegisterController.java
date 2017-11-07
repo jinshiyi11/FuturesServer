@@ -20,7 +20,7 @@ import java.io.IOException;
  *
  */
 @RestController
-public class Register {
+public class RegisterController {
     @Autowired
     private UserMapper mUserMapper;
 
@@ -44,7 +44,7 @@ public class Register {
             user.setPassword(md5Password);
             mUserMapper.addUser(user);
 
-            Login login=new Login();
+            LoginController login=new LoginController();
             login.setUserRepository(mUserMapper);
             return login.login(phone,password,request,response);
         }

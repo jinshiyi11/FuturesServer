@@ -21,6 +21,11 @@ security:
     resource:
       filter-order: 3
 
+# Mybatis配置
+mybatis:
+    mapperLocations: classpath:mapper/*.xml
+#    configLocation: classpath:mybatis.xml
+
 logging:
   level:
     org.springframework.security: DEBUG

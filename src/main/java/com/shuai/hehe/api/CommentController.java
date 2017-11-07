@@ -19,11 +19,6 @@ public class CommentController {
     @Autowired
     private CommentMapper mMapper;
 
-    public static class CommentInfo extends Comment {
-        User commentUser;
-        //CommentInfo originalComment;
-    }
-
     @GetMapping("api/getCommentList")
     @ResponseBody
     public ResponseInfo<List<Comment>> getCommentList(
@@ -46,13 +41,7 @@ public class CommentController {
             @RequestParam("futuresId") long futuresId,
             @RequestParam("userId") long userId,
             @RequestParam("content") String content) {
-        Comment comment = new Comment();
-        comment.setPid(pid);
-        comment.setPpid(ppid);
-        comment.setUserId(userId);
-        comment.setContent(content);
-        comment.setDate(new Date().getTime());
-        mMapper.addComment(comment);
+        mMapper.addComment(pid,ppid,futuresId,userId,content,new Date().getTime());
         return new ResponseInfo(ErrorCode.ERROR_SUCCESS);
     }
 

@@ -15,7 +15,8 @@ public class User {
 
     @NotBlank
     private String phone;
-    private String password;
+
+    private transient String password;
 
     private String nickName;
     private String headImageUrl;
