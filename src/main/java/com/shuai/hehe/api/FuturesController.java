@@ -21,7 +21,7 @@ public class FuturesController {
     @Autowired
     private FuturesMapper mMapper;
 
-    @GetMapping("/api/futuresList")
+    @GetMapping("/api/getFuturesList")
     @ResponseBody
     public ResponseInfo<List<Futures>> getFuturesList() {
         List<Futures> data = mMapper.getFuturesList();
@@ -36,7 +36,7 @@ public class FuturesController {
      * @param key 关键字
      * @return 找到的期货信息列表
      */
-    @PostMapping("/api/searchFutures")
+    @RequestMapping("/api/searchFutures")
     @ResponseBody
     public ResponseInfo<List<Futures>> searchFutures(@NotNull @Size(min = 1,message = "关键字不能为空") String key) {
         List<Futures> data = mMapper.searchFutures(key);

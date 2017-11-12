@@ -28,7 +28,14 @@
         left join user as u1 on c1.userId=u1.id
         left join comment as c2 on c1.pid=c2.id
         left join user as u2 on c2.userId=u2.id
-        WHERE c1.futuresId=#{futuresId} AND c1.id &lt; #{startCommentId} ORDER BY c1.id DESC LIMIT 30
+        WHERE c1.futuresId=#{futuresId}
+		<if test="after==0">
+		AND c1.id &lt; #{startCommentId}
+		</if>
+		<if test="after!=0">
+			AND c1.id > #{startCommentId}
+		</if>
+		ORDER BY c1.id DESC LIMIT #{count}
 	</select>
 
 	<resultMap id="commentResult" type="com.shuai.hehe.api.entity.Comment">

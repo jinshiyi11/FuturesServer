@@ -1,5 +1,6 @@
 package com.shuai.hehe.oauth;
 
+import com.shuai.hehe.api.entity.AuthenticatedUser;
 import com.shuai.hehe.api.entity.User;
 import com.shuai.hehe.api.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .roles("USER");
 
         auth.userDetailsService(userDetailsService)
-        .passwordEncoder(new Md5PasswordEncoder());
+                .passwordEncoder(new Md5PasswordEncoder());
 
 //        auth.jdbcAuthentication().dataSource(dataSource).withUser("dave")
 //                .password("secret").roles("USER");
@@ -110,7 +111,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         @Override
         public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
             User user = mUserMapper.getByPhone(phone);
-            return new org.springframework.security.core.userdetails.User(user.getPhone(), user.getPassword(), mAuthorities);
+            return new AuthenticatedUser(user.getId(), user.getPhone(), user.getPassword(), mAuthorities);
         }
     }
 }

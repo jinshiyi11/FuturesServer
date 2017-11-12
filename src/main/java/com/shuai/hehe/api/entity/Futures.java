@@ -12,7 +12,6 @@ public class Futures {
     private int id;
 
     @NotNull
-    @Size(min = 5,message = "长度至少5个字符")
     private String name;
 
     @NotNull
