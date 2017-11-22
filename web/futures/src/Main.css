@@ -1,0 +1,12 @@
+.leftMenu{
+  float:left;
+  width:250px;
+  height: 100%;
+  background-color: #fafafa;
+}
+
+.right{
+  float:left;
+  width: calc(100% - 250px);
+  height: 100%;
+}

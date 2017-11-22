@@ -25,6 +25,23 @@ public class CommentController {
     @Autowired
     private CommentMapper mMapper;
 
+    @GetMapping("api/getAllCommentList")
+    @ResponseBody
+    public ResponseInfo<List<Comment>> getAllCommentList(
+            @RequestParam(value = "startCommentId", defaultValue = "" + Long.MAX_VALUE)
+                    long startCommentId,
+            @RequestParam(value = "count", defaultValue = "20")
+            @Range(min = 10, max = 100, message = "count param invalid") int count,
+            @RequestParam(value = "after", defaultValue = "0") int after) {
+        if (startCommentId <= 0) {
+            startCommentId = Long.MAX_VALUE;
+        }
+        List<Comment> commentList = mMapper.getAllCommentList(startCommentId, count, after);
+        ResponseInfo<List<Comment>> result = new ResponseInfo<>();
+        result.setData(commentList);
+        return result;
+    }
+
     @GetMapping("api/getCommentList")
     @ResponseBody
     public ResponseInfo<List<Comment>> getCommentList(

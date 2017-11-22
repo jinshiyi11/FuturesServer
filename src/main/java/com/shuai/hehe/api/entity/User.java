@@ -3,10 +3,6 @@ package com.shuai.hehe.api.entity;
 import com.google.gson.annotations.SerializedName;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 /**
  * 用户信息
  */

@@ -10,6 +10,11 @@ import java.util.List;
  */
 @Mapper
 public interface CommentMapper {
+    List<Comment> getAllCommentList(
+            @Param("startCommentId") long startCommentId,
+            @Param("count") int count,
+            @Param("after") int after);
+
     List<Comment> getCommentList(
             @Param("futuresId") int futuresId,
             @Param("startCommentId") long startCommentId,

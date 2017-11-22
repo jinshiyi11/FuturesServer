@@ -17,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @Validated
+//@CrossOrigin(origins = "*")
 public class FuturesController {
     @Autowired
     private FuturesMapper mMapper;

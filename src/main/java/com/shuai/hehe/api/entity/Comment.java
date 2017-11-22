@@ -1,9 +1,5 @@
 package com.shuai.hehe.api.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 /**
  * 评论
  */

@@ -2,6 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shuai.hehe.api.mapper.CommentMapper">
+	<select id="getAllCommentList" resultMap="commentResult">
+		select
+		c1.id as c1_id,
+		c1.pid as c1_pid,
+		c1.ppid as c1_ppid,
+		c1.futuresId as c1_futuresId,
+		c1.userId as c1_userId,
+		c1.content as c1_content,
+		c1.date as c1_date,
+		u1.id as u1_id,
+		u1.phone as u1_phone,
+		u1.nickName as u1_nickName,
+		c2.id as c2_id,
+		c2.pid as c2_pid,
+		c2.ppid as c2_ppid,
+		c2.futuresId as c2_futuresId,
+		c2.userId as c2_userId,
+		c2.content as c2_content,
+		c2.date as c2_date,
+		u2.id as u2_id,
+		u2.phone as u2_phone,
+		u2.nickName as u2_nickName
+		from comment as c1
+		left join user as u1 on c1.userId=u1.id
+		left join comment as c2 on c1.pid=c2.id
+		left join user as u2 on c2.userId=u2.id
+		<if test="after==0">
+			WHERE c1.id &lt; #{startCommentId}
+		</if>
+		<if test="after!=0">
+			WHERE c1.id > #{startCommentId}
+		</if>
+		ORDER BY c1.id DESC LIMIT #{count}
+	</select>
+
 	<select id="getCommentList" resultMap="commentResult">
 		select
 		c1.id as c1_id,
