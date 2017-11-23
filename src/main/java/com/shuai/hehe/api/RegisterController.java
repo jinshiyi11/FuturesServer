@@ -6,6 +6,7 @@ import com.shuai.hehe.api.mapper.UserMapper;
 import com.shuai.hehe.api.response.ErrorCode;
 import com.shuai.hehe.api.response.ResponseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,9 @@ import java.io.IOException;
  */
 @RestController
 public class RegisterController {
+    @Autowired
+    private ApplicationContext mContext;
+
     @Autowired
     private UserMapper mUserMapper;
 
@@ -42,10 +46,11 @@ public class RegisterController {
             Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
             String md5Password = passwordEncoder.encodePassword(password, null);
             user.setPassword(md5Password);
+            user.setNickName(UsernameGenerator.generate());
+            user.setHeadImageUrl(UserHeadImageGenerator.generate());
             mUserMapper.addUser(user);
 
-            LoginController login=new LoginController();
-            login.setUserRepository(mUserMapper);
+            LoginController login=mContext.getBean(LoginController.class);
             return login.login(phone,password,request,response);
         }
 

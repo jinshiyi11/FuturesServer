@@ -35,7 +35,8 @@ import java.io.IOException;
  * 安全配置
  */
 @Configuration
-@EnableWebSecurity(debug = true)
+//@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class SecurityConfig {
     @Autowired
     private DataSource dataSource;

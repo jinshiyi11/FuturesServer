@@ -5,6 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
+import md5 from "blueimp-md5"
 import * as qs from 'qs';
 import * as Util from './util/util'
 import * as Log from './util/log'
@@ -43,7 +44,7 @@ class Login extends Component {
   doLogin(event) {
     var payload = {
       "username": this.state.username,
-      "password": this.state.password
+      "password": md5(this.state.password)
     };
     axios.post("/api/login", qs.stringify(payload))
       .then((response) => {

@@ -67,8 +67,7 @@ public class CommentController {
             @RequestParam(value = "ppid", defaultValue = "-1") long ppid,
             @RequestParam("futuresId") long futuresId,
             @RequestParam("content") String content) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        long uid=((AuthenticatedUser)authentication.getPrincipal()).getUid();
+        long uid=Utils.getUserId();
         mMapper.addComment(pid, ppid, futuresId, uid, content, new Date().getTime());
         return new ResponseInfo(ErrorCode.ERROR_SUCCESS);
     }

@@ -2,7 +2,9 @@ server:
   port: 8081
 spring:
   profiles:
-    active: dev
+    active: prod
+  aop:
+    auto: true
 
 security:
   basic:
