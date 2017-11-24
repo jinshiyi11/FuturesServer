@@ -1,11 +1,11 @@
 package com.shuai.hehe.api;
 
-import com.google.gson.Gson;
 import com.shuai.hehe.api.entity.User;
 import com.shuai.hehe.api.mapper.UserMapper;
-import com.shuai.hehe.api.response.ErrorCode;
 import com.shuai.hehe.api.response.ResponseInfo;
-import okhttp3.*;
+import okhttp3.OkHttpClient;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
@@ -13,12 +13,10 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordAccessTokenProvider;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +28,8 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 public class LoginController {
+    private static final Log mLogger = LogFactory.getLog(LoginController.class);
+
     @Autowired
     private AuthenticationManager authenticationManager;
 //    @Autowired
@@ -39,8 +39,8 @@ public class LoginController {
     private UserMapper mUserMapper;
     private final OkHttpClient mClient = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30,TimeUnit.SECONDS)
-            .writeTimeout(30,TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build();
 
     public static class TokenInfo {
@@ -98,9 +98,11 @@ public class LoginController {
 //            return result;
 //        }
 
+        String url = "http://" + request.getServerName() + ":"
+                + request.getServerPort() + "/oauth/token";
+        mLogger.info("login url:" + url);
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
-        resource.setAccessTokenUri("http://" + request.getServerName() + ":"
-                + request.getServerPort() + "/oauth/token");
+        resource.setAccessTokenUri(url);
         resource.setClientId("ClientId");
         resource.setClientSecret("secret");
         resource.setGrantType("password");
