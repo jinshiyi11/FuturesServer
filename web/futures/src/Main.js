@@ -26,7 +26,8 @@ class Main extends Component {
     return (
       <div>
         <AppBar title="老鹰期货" showMenuIconButton={false} 
-        iconElementRight={<FlatButton label="登录" onClick={()=>this.props.history.push("/login")} />} />
+        //iconElementRight={<FlatButton label="登录" onClick={()=>this.props.history.push("/login")} />} 
+          />
         <Route path="/" render={(props) =><LeftMenu {...props} className="leftMenu"/>}/>
           <Switch>
             <div className="right">

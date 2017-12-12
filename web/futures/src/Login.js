@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import * as Actions from './actions'
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,6 +10,7 @@ import md5 from "blueimp-md5"
 import * as qs from 'qs';
 import * as Util from './util/util'
 import * as Log from './util/log'
+import "./Login.css"
 
 class Login extends Component {
   constructor(props) {
@@ -21,8 +23,10 @@ class Login extends Component {
   }
 
   render() {
+    console.log("login")
     return (
-      <div>
+      <div className="center">
+        {/*<AppBar showMenuIconButton={false} title="老鹰财经"/>*/}
         <TextField
           name="username"
           hintText="请输入用户名"
@@ -36,7 +40,7 @@ class Login extends Component {
           onChange={(event, newValue) => this.setState({ password: newValue })}
         />
         <br />
-        <RaisedButton label="登录" primary={true} onClick={this.doLogin} />
+        <RaisedButton className="loginButton" fullWidth={true} label="登录" primary={true} onClick={this.doLogin} />
       </div>
     );
   }
@@ -53,7 +57,8 @@ class Login extends Component {
           let uid=response.data.data.uid
           let token=response.data.data.token
           this.props.loginSuccessDispatch(uid,token)
-          this.props.history.goBack();
+          // this.props.history.goBack();
+          this.props.history.replace("/")
         }
       })
   }
@@ -68,7 +73,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(Login)
+)(Login))

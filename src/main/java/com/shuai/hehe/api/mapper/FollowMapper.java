@@ -24,4 +24,11 @@ public interface FollowMapper {
             "FROM futures as f LEFT JOIN followed ON f.id=followed.futuresId" +
             " WHERE followed.uid=#{userId}")
     List<Futures> getFollowedFutures(@Param("userId") long userId);
+
+    /**
+     * 删除某个期货时删除所有对应的关注
+     * @param futuresId
+     */
+    @Delete("DELETE FROM followed WHERE futuresId=#{futuresId}")
+    void removeFutures(@Param("futuresId") int futuresId);
 }

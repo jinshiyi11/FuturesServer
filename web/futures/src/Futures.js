@@ -88,7 +88,7 @@ class Futures extends Component {
     return (
       <div>
         <div>
-          <span>name</span><TextField ref="name" name="name" /><span>title</span><TextField ref="title" name="title" />
+          <span>期货id</span><TextField ref="name" name="name" /><span>期货名称</span><TextField ref="title" name="title" />
           <RaisedButton label="添加" primary={true} onClick={this.addFutures} />
         </div>
         <Table selectable={false}>
@@ -108,7 +108,6 @@ class Futures extends Component {
     );
   }
 }
-
 
 const mapStateToProps = state => {
   return {

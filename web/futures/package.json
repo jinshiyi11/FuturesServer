@@ -2,7 +2,8 @@
   "name": "futures",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8081/",
+  "proxy": "http://198.13.34.123/",
+  "proxy_back": "http://localhost:8081/",
   "dependencies": {
     "@blueprintjs/core": "^1.33.0",
     "react": "^16.1.1",
