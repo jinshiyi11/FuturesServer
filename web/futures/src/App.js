@@ -6,6 +6,7 @@ import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from './Login';
 import Main from './Main';
+import Manager from './Manager';
 import NotFound from './NotFound'
 import {requireAuthentication} from './AuthenticatedComponent'
 
@@ -32,6 +33,7 @@ class App extends Component {
   render() {
     return (
       <Switch>
+        <Route exact path="/" component={Main} />
         <Route path="/login" component={Login} />
         {/*<Route path="/" render={() => {
           console.log("yyyyy")
@@ -48,7 +50,7 @@ class App extends Component {
             return <Main />
           }
         }} />*/}
-        <PrivateRoute path="/" token={this.props.token} component={Main}/>
+        <PrivateRoute path="/mymanager" token={this.props.token} component={Manager}/>
         {/*<Route path="/" component={requireAuthentication(Main)}/>*/}
         <Route component={NotFound} />
       </Switch>

@@ -58,7 +58,7 @@ class Login extends Component {
           let token=response.data.data.token
           this.props.loginSuccessDispatch(uid,token)
           // this.props.history.goBack();
-          this.props.history.replace("/")
+          this.props.history.replace("/mymanager")
         }
       })
   }

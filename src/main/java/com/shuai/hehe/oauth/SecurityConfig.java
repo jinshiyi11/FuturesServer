@@ -190,7 +190,7 @@ public class SecurityConfig {
 //            http.cors();
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                     .and().authorizeRequests()
-                    .antMatchers("/", "/index.html**", "/login**").permitAll()
+                    .antMatchers("/", "/index.html**", "/index.html/**", "/login**", "/mymanager**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin().loginPage("/login").permitAll()

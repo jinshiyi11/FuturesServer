@@ -22,9 +22,9 @@ class LeftMenu extends Component {
   render() {
     return (
       <List className={this.props.className}>
-        <ListItem primaryText="期货信息" onClick={() => this.props.history.push("/futures")} />
-        <ListItem primaryText="评论" onClick={() => this.props.history.push("/comment")} />
-        <ListItem primaryText="关于" onClick={() => this.props.history.push("/about")} />
+        <ListItem primaryText="期货信息" onClick={() => this.props.history.push("/mymanager/futures")} />
+        <ListItem primaryText="评论" onClick={() => this.props.history.push("/mymanager/comment")} />
+        <ListItem primaryText="关于" onClick={() => this.props.history.push("/mymanager/about")} />
       </List>
     )
   }
