@@ -99,7 +99,7 @@ public class LoginController {
 //        }
 
         String url = "http://" + request.getServerName() + ":"
-                + request.getServerPort() + "/oauth/token";
+                + request.getServerPort()+request.getContextPath() + "/oauth/token";
         mLogger.info("login url:" + url);
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
         resource.setAccessTokenUri(url);

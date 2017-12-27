@@ -1,3 +1,6 @@
+create user futures_user IDENTIFIED by 'futures_123';
+grant select,update,delete,insert,create,alter on futures.* to futures_user;
+
 #用户信息
 CREATE TABLE IF NOT EXISTS user(
 id int(10) NOT NULL AUTO_INCREMENT,

@@ -113,6 +113,7 @@ public class SecurityConfig {
             http.antMatcher("/api/**")
                     .authorizeRequests()
                     .antMatchers(
+                            "/api/test",
                             "/api/login",
                             "/api/sendVerificationCode",
                             "/api/registerByPhone",
